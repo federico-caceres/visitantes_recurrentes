@@ -27,11 +27,10 @@ app.get('/', async (req, res) => {
 
     try {
         const visitor = await Visitor.findOne({ "name": nameVisitor });
-        
         if (visitor && nameVisitor != 'Anónimo') 
         {
             visitor.count++;
-            visitor.save();
+            await visitor.save();
         }else{
             await Visitor.create({name: nameVisitor, count: 1});
         }
